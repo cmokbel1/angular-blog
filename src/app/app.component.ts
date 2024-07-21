@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
   standalone: true,
   imports: [CommonModule, RouterOutlet, NavigationBarComponent, NavigationFooterComponent],
   templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
 })
 export class AppComponent {
   loading: Observable<boolean> | undefined

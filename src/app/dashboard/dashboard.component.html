@@ -1,7 +1,14 @@
-@if (loading) {
-<h3>...loading</h3>
-} @else {
-<div>
-  <h1>Blog Dashboard Compoment</h1>
+<div class="dashboard-container">
+  @if (loading()) {
+    <h3>...loading</h3>
+  } @else {
+    <h1>Blog Dashboard Compoment</h1>
+    <div>
+      <app-blog-card
+        [id]="1"
+        [body]="'test test test test test'"
+        [title]="'Test Blog'"
+      ></app-blog-card>
+    </div>
+  }
 </div>
-}

@@ -2,13 +2,13 @@ import { Component, Input } from '@angular/core';
 
 
 @Component({
-  selector: 'app-blog-component',
+  selector: 'app-blog-card',
   standalone: true,
   imports: [],
-  templateUrl: './blog-component.component.html',
-  styleUrl: './blog-component.component.scss'
+  templateUrl: './blog-card.component.html',
+  styleUrl: './blog-card.component.scss'
 })
-export class BlogComponentComponent {
+export class BlogCardComponent {
 @Input() title?: string;
 @Input() id?: number;
 @Input() body?: string;
