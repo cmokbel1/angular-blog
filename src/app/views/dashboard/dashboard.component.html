@@ -1,0 +1,13 @@
+<div class="dashboard-container">
+  @if (loading()) {
+    <h3>...loading</h3>
+  } @else {
+    <h1>Blog Dashboard</h1>
+    <div>
+      <!-- TODO: add for loop when database is connected -->
+      @for (num of numbers; track num) {
+        <app-blog-card [id]="num" [title]="'Test Blog ' + num"></app-blog-card>
+      }
+    </div>
+  }
+</div>

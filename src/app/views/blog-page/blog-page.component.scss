@@ -1,0 +1,17 @@
+.blog-page-container {
+    padding-top:6em;
+    background-color: #ef233c;
+    color: #fafafb;
+    gap: 25px;
+    text-align:center;
+    display:flex;
+    justify-content: center;
+    .blog-container {
+        width: 95%;
+
+        .blog-content {
+            padding: 1em;
+            text-align:left;
+        }
+    };
+}
