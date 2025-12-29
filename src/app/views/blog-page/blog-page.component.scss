@@ -1,17 +1,21 @@
 .blog-page-container {
-    padding-top:6em;
-    background-color: #ef233c;
+  background-color: #ef233c;
+
+  .blog-content-container {
     color: #fafafb;
     gap: 25px;
-    text-align:center;
-    display:flex;
-    justify-content: center;
-    .blog-container {
-        width: 95%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    .container {
+      justify-content: center;
+      display: flex;
+      flex-direction: column;
 
-        .blog-content {
-            padding: 1em;
-            text-align:left;
-        }
-    };
+      .blog-content {
+        padding: 1em;
+        text-align: left;
+      }
+    }
+  }
 }

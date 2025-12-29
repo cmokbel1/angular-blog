@@ -1,5 +1,12 @@
+@use 'variables' as variables;
+
 .back-button {
     padding:1em;
-    background-color:darkgray;
-    box-shadow: 1rem;
+    background-color:variables.$secondary-color;
+    color: variables.$primary-color;
+    box-shadow: 0 2px 4px variables.$border-light;
+    &:hover {
+        background-color: variables.$tertiary-color;
+        color: variables.$white;
+    }
 }

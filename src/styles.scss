@@ -1,3 +1,5 @@
+@use './styles/variables';
+
 /* You can add global styles to this file, and also import other style files */
 /* PrimeNG CSS import removed for v19+ - will need to be updated for new structure */
 html, body {
@@ -10,7 +12,7 @@ html, body {
 h1,h2,h3 {
     display: inline;
     font-size: 2em;
-    color: #edf2f4;
+    color: variables.$text-color;
     font-weight: 500;
     letter-spacing: -0.125rem;
     margin: 0;
