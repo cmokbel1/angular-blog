@@ -3,11 +3,10 @@ import { RouterModule } from '@angular/router';
 
 
 @Component({
-  selector: 'app-blog-card',
-  standalone: true,
-  imports: [RouterModule],
-  templateUrl: './blog-card.component.html',
-  styleUrl: './blog-card.component.scss'
+    selector: 'app-blog-card',
+    imports: [RouterModule],
+    templateUrl: './blog-card.component.html',
+    styleUrl: './blog-card.component.scss'
 })
 export class BlogCardComponent {
 @Input() title?: string;

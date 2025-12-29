@@ -2,11 +2,10 @@ import { Component, OnInit, signal } from '@angular/core';
 import { BlogCardComponent } from '../../components/blog-card/blog-card.component';
 
 @Component({
-  selector: 'app-dashboard',
-  standalone: true,
-  imports: [BlogCardComponent],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+    selector: 'app-dashboard',
+    imports: [BlogCardComponent],
+    templateUrl: './dashboard.component.html',
+    styleUrl: './dashboard.component.scss'
 })
 
 export class DashboardComponent implements OnInit {

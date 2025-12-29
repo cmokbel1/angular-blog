@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-blog-page',
-  standalone: true,
-  imports: [],
-  templateUrl: './blog-page.component.html',
-  styleUrl: './blog-page.component.scss'
+    selector: 'app-blog-page',
+    imports: [],
+    templateUrl: './blog-page.component.html',
+    styleUrl: './blog-page.component.scss'
 })
 export class BlogPageComponent implements OnInit {
   blogId:string | null = '';
