@@ -1,6 +1,11 @@
 .dashboard-container {
-    padding-top:6em;
     background-color: #ef233c;
     color: #8d99ae;
-    gap: 25px;
+    .blog-card-container {
+        display:flex;
+        flex-direction: column;
+        gap: 25px;
+        justify-content: center;
+    }
+
 }

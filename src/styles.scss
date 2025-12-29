@@ -1,9 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 /* PrimeNG CSS import removed for v19+ - will need to be updated for new structure */
-
-a:hover {
-    cursor: hover;
+html, body {
+  margin: 0 !important;
+  padding: 0;
+  height: 100%; /* Recommended to ensure full height */
 }
+
 
 h1,h2,h3 {
     display: inline;

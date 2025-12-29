@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -9,8 +9,8 @@ import { RouterModule } from '@angular/router';
   styleUrl: './blog-card.component.scss',
 })
 export class BlogCardComponent {
-  @Input() title?: string;
-  @Input() id?: number;
+  title = input<string>('init');
+  id = input<number | null>(1);
 
   createdAt: string = 'Oct 5th, 2024';
 }
