@@ -11,6 +11,6 @@ import { RouterModule } from '@angular/router';
 export class BlogCardComponent {
   title = input<string>('init');
   id = input<number | null>(1);
-
+  excerpt = input<string | undefined>('');
   createdAt: string = 'Oct 5th, 2024';
 }

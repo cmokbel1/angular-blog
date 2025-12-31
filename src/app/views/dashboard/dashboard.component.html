@@ -5,8 +5,12 @@
     <h1>Blogs</h1>
     <div class="blog-card-container">
       <!-- TODO: add for loop when database is connected -->
-      @for (num of numbers; track $index) {
-        <app-blog-card [id]="num" [title]="'Test Blog ' + num"></app-blog-card>
+      @for (blog of blogs(); track $index) {
+        <app-blog-card
+          [id]="blog._id"
+          [title]="blog.title"
+          [excerpt]="blog.excerpt"
+        ></app-blog-card>
       }
     </div>
   }

@@ -1,6 +1,6 @@
 // Blog interface matching the backend model
 export interface Blog {
-  _id: string;
+  _id: number;
   title: string;
   content: string;
   excerpt?: string;

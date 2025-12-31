@@ -1,9 +1,9 @@
-import { Component, OnInit, signal, inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, signal, inject, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Subject, takeUntil } from 'rxjs';
 import { BlogCardComponent } from '../../components/blog-card/blog-card.component';
 import { BlogsService } from '../../blogs.service';
 import { Blog } from 'src/app/shared/global.models';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
   selector: 'app-dashboard',
   imports: [BlogCardComponent, CommonModule],
@@ -11,9 +11,9 @@ import { Blog } from 'src/app/shared/global.models';
   styleUrl: './dashboard.component.scss',
   standalone: true,
 })
-export class DashboardComponent implements OnInit, OnDestroy {
+export class DashboardComponent implements OnInit {
   private readonly blogsService = inject(BlogsService);
-  private readonly destroy$ = new Subject<void>();
+  private readonly destroyRef = inject(DestroyRef);
 
   // Reactive signals
   loading = signal<boolean>(false);
@@ -27,18 +27,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.loadBlogs();
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
   private loadBlogs(): void {
     this.loading.set(true);
     this.error.set(null);
 
     this.blogsService
       .getAllBlogs()
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (blogs) => {
           this.blogs.set(blogs);

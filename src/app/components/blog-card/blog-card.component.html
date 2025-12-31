@@ -2,7 +2,8 @@
   <a [routerLink]="['/blog', id()]">
     <div class="content-container">
       <h3>{{ title() }}</h3>
-      <h4>Created On: {{ createdAt }}</h4>
+      <p>{{ excerpt() }}</p>
+      <sub>Created On: {{ createdAt }}</sub>
     </div>
   </a>
 </div>

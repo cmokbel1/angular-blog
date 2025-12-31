@@ -1,7 +1,8 @@
-import { Component, OnInit, signal, inject, OnDestroy } from '@angular/core';
+import { Component, OnInit, signal, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { Subject, takeUntil } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { DestroyRef } from '@angular/core';
 import { BackButtonComponent } from '../../shared/back-button/back-button.component';
 import { BlogsService } from '../../blogs.service';
 import { Blog } from 'src/app/shared/global.models';
@@ -13,10 +14,10 @@ import { Blog } from 'src/app/shared/global.models';
   styleUrl: './blog-page.component.scss',
   standalone: true,
 })
-export class BlogPageComponent implements OnInit, OnDestroy {
+export class BlogPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly blogsService = inject(BlogsService);
-  private readonly destroy$ = new Subject<void>();
+  private readonly destroyRef = inject(DestroyRef);
 
   // Reactive signals
   blogId = signal<string | null>(null);
@@ -35,11 +36,6 @@ export class BlogPageComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy(): void {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
-
   private fetchBlogData(id: string): void {
     this.loading.set(true);
     this.error.set(null);
@@ -48,7 +44,7 @@ export class BlogPageComponent implements OnInit, OnDestroy {
 
     this.blogsService
       .getBlogById(id)
-      .pipe(takeUntil(this.destroy$))
+      .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: (blog) => {
           this.blog.set(blog);
