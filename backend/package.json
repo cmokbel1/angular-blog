@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "server": "concurrently \"node server.js\""
+    "server": "concurrently \"node server.js\"",
+    "seed": "node seedDatabase.js"
   },
   "type": "module",
   "keywords": [],

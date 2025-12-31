@@ -1,25 +1,67 @@
-const router = require("express").Router();
+import express from "express";
+import Blog from "../models/Blog.js";
+import { getFromCache, setCache, clearCache } from "../utils/cache.js";
+
+const router = express.Router();
 
 // get one
 router.get("/:id", async (req, res) => {
-  if (isNaN(req.params.id)) {
-    res.status(400).json({ error: "invalid ID" });
-    return;
+  try {
+    const blogId = req.params.id;
+
+    // Check if ID is valid ObjectId format
+    if (!blogId.match(/^[0-9a-fA-F]{24}$/)) {
+      return res.status(400).json({ error: "Invalid blog ID format" });
+    }
+
+    // Check cache first
+    const cacheKey = `blog_${blogId}`;
+    let blog = getFromCache(cacheKey);
+
+    if (!blog) {
+      // Fetch from database if not in cache
+      blog = await Blog.findById(blogId);
+
+      if (!blog) {
+        return res.status(404).json({ error: "Blog not found" });
+      }
+
+      // Cache the result for 10 minutes
+      setCache(cacheKey, blog, 600000);
+    }
+
+    res.json(blog);
+  } catch (error) {
+    console.error("Error fetching blog:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
-  // const data = Call to mongo db to get blog by id
-  if (data.error) {
-    res.status(400).json(data.error);
-    return;
-  }
-  res.json(player);
 });
 
 // get all
 router.get("/", async (req, res) => {
-  // const data = Call to mongo db to get all blogs
-  if (data.error) {
-    res.status(400).json(data.error);
-    return;
+  try {
+    const cacheKey = "all_blogs";
+    let blogs = getFromCache(cacheKey);
+
+    if (!blogs) {
+      // Fetch from database if not in cache
+      blogs = await Blog.find().sort({ createdAt: -1 });
+
+      // Cache the result for 5 minutes
+      setCache(cacheKey, blogs, 300000);
+    }
+
+    res.json(blogs);
+  } catch (error) {
+    console.error("Error fetching blogs:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
-  res.json(data);
 });
+
+// Clear cache endpoint (for development/admin use)
+router.delete("/cache", (req, res) => {
+  clearCache();
+  res.json({ message: "Cache cleared" });
+});
+
+export default router;
