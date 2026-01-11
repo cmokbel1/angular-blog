@@ -1,5 +1,10 @@
-const mongoose = require("mongoose");
-const Blog = require("./models/Blog");
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import Blog from "./models/Blog.js";
+
+// Load environment variables from .env file
+dotenv.config();
+
 // Sample blog data
 const sampleBlogs = [
   {
@@ -39,12 +44,10 @@ const sampleBlogs = [
 const seedDatabase = async () => {
   try {
     // Connect to MongoDB
-    const MONGODB_URI =
-      process.env.MONGODB_URI || "mongodb://localhost:27017/angular-blog";
-    await mongoose.connect(MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const MONGODB_URI = process.env.MONGODB_URI;
+
+    console.log("expected URI:", MONGODB_URI);
+    await mongoose.connect(MONGODB_URI, {});
 
     console.log("Connected to MongoDB");
 

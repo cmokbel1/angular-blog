@@ -1,6 +1,10 @@
+import dotenv from "dotenv";
 import mongoose from "mongoose";
 
-let isConnected = () => mongoose.connection.readyState === "connected";
+// Load environment variables from .env file
+dotenv.config();
+
+let isConnected = () => mongoose.connection.readyState === 1;
 let connectionTimeout;
 
 // MongoDB connection string - update with your actual MongoDB URI
@@ -9,7 +13,8 @@ const MONGODB_URI =
 
 const connectDB = async () => {
   try {
-    if (isConnected) {
+    // Check if already connected (readyState 1 = connected)
+    if (mongoose.connection.readyState === 1) {
       return;
     }
 
@@ -17,29 +22,30 @@ const connectDB = async () => {
     if (connectionTimeout) {
       clearTimeout(connectionTimeout);
     }
+
     const conn = await mongoose.connect(MONGODB_URI, {});
 
-    isConnected = true;
     console.log(`MongoDB Connected: ${conn.connection.host}`);
+    console.log(`Connected to database: ${conn.connection.name}`);
+
     // Set auto-disconnect after 30 seconds of inactivity
     connectionTimeout = setTimeout(() => {
       disconnectDB();
     }, 30000);
   } catch (error) {
     console.error("MongoDB connection error:", error);
-    isConnected = false;
     throw error;
   }
 };
 
 const disconnectDB = async () => {
   try {
-    if (!isConnected) {
+    // Check if connected (readyState 1 = connected)
+    if (mongoose.connection.readyState !== 1) {
       return;
     }
 
     await mongoose.connection.close();
-    isConnected = false;
     console.log("MongoDB Disconnected");
     if (connectionTimeout) {
       clearTimeout(connectionTimeout);

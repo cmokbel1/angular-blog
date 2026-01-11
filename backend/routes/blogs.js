@@ -45,7 +45,9 @@ router.get("/", async (req, res) => {
 
     if (!blogs) {
       // Fetch from database if not in cache
-      blogs = await Blog.find().sort({ createdAt: -1 });
+      console.log("Fetching blogs from database");
+      console.log(Blog);
+      blogs = await Blog.find();
 
       // Cache the result for 5 minutes
       setCache(cacheKey, blogs, 300000);
