@@ -9,7 +9,7 @@ import { Blog, ApiError } from 'src/app/shared/global.models';
 })
 export class BlogsService {
   private readonly http = inject(HttpClient);
-  private readonly API_URL = 'http://localhost:3000/blogs';
+  private readonly API_URL = 'angular-blog-cln2o.ondigitalocean.app/blogs';
 
   // Signals for reactive state management
   private readonly allBlogsSignal = signal<Blog[] | null>(null);

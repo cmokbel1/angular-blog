@@ -1,0 +1,13 @@
+
+> server@1.0.0 server
+> concurrently "node server.js"
+
+[0] [dotenv@17.2.3] injecting env (5) from .env -- tip: 🔐 encrypt with Dotenvx: https://dotenvx.com
+[0] [dotenv@17.2.3] injecting env (0) from .env -- tip: 🗂️ backup and recover secrets: https://dotenvx.com/ops
+[0] Server is running at http://localhost:3000
+[0] Error fetching blogs: MongooseError: Operation `blogs.find()` buffering timed out after 10000ms
+[0]     at Timeout.<anonymous> (/Users/clm/src/personal/angular-blog/backend/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:187:23)
+[0]     at listOnTimeout (node:internal/timers:573:17)
+[0]     at process.processTimers (node:internal/timers:514:7)
+[0] MongoDB Disconnected
+[0] node server.js exited with code SIGHUP
