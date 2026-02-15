@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DestroyRef } from '@angular/core';
 import { BackButtonComponent } from '../../shared/back-button/back-button.component';
-import { BlogsService } from '../../blogs.service';
+import { BlogsService } from '../../services/blogs.service';
 import { Blog } from 'src/app/shared/global.models';
 
 @Component({

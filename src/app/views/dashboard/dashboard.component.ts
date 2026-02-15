@@ -1,7 +1,7 @@
 import { Component, OnInit, signal, inject, DestroyRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BlogCardComponent } from '../../components/blog-card/blog-card.component';
-import { BlogsService } from '../../blogs.service';
+import { BlogsService } from '../../services/blogs.service';
 import { Blog } from 'src/app/shared/global.models';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 @Component({
