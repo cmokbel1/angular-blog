@@ -1,3 +1,9 @@
+export interface User {
+  username: string;
+  password: string;
+  isAdmin: boolean;
+  createdAt: Date;
+}
 // Blog interface matching the backend model
 export interface Blog {
   _id: string;
