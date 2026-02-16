@@ -19,15 +19,15 @@ app.use(express.json());
 
 // Database connection middleware for intermittent connections
 app.use(async (req, res, next) => {
-  if (req.path.includes("/blogs") || req.path.includes("/blog")) {
-    try {
-      await connectDB();
-      // Keep connection alive for ongoing requests
-      keepConnectionAlive();
-    } catch (error) {
-      console.error("Database connection failed:", error);
-      return res.status(500).json({ error: "Database connection failed" });
-    }
+  // check path of request for special logic here
+  // currently not needed
+  try {
+    await connectDB();
+    // Keep connection alive for ongoing requests
+    keepConnectionAlive();
+  } catch (error) {
+    console.error("Database connection failed:", error);
+    return res.status(500).json({ error: "Database connection failed" });
   }
   next();
 });
