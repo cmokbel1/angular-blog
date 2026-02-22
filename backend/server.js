@@ -7,6 +7,8 @@ import {
   disconnectDB,
   keepConnectionAlive,
 } from "./config/database.js";
+import User from "./models/User.js";
+import passport from "passport";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -16,6 +18,12 @@ const port = 8080;
 
 app.use(cors());
 app.use(express.json());
+app.use(passport.initialize());
+
+passport.use(User.createStrategy());
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // Database connection middleware for intermittent connections
 app.use(async (req, res, next) => {

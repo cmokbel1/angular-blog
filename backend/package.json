@@ -19,6 +19,8 @@
     "express": "^5.2.1",
     "mongodb": "^6.21.0",
     "mongoose": "^8.21.0",
+    "passport": "^0.7.0",
+    "passport-local-mongoose": "^9.0.1",
     "tslint": "^5.20.1",
     "typescript": "^5.9.3"
   }
