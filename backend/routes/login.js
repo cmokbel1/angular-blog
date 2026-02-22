@@ -34,4 +34,19 @@ router.post("/", async (req, res) => {
   }
 });
 
+router.post("/register", async (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password)
+    return res
+      .status(400)
+      .json({ error: "Username and password are required" });
+
+  const existing = await User.findOne({ username });
+  if (existing)
+    return res.status(409).json({ error: "Username already exists" });
+
+  const user = await User.register(new User({ username }), password); // pre-save hook hashes it
+  return res.status(201).json({ id: user._id, username: user.username });
+});
+
 export default router;
