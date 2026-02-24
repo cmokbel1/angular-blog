@@ -14,6 +14,7 @@ import { RegisterComponent } from './register/register.component';
 export class LoginComponent {
   readonly formbuilder = inject(FormBuilder);
   private readonly dialogService = inject(DialogService);
+
   loginForm = this.formbuilder.group({
     username: ['', Validators.required],
     password: ['', Validators.required],
@@ -22,6 +23,7 @@ export class LoginComponent {
   onSubmit() {
     // Handle login logic here
   }
+
   openRegisterDialog() {
     this.dialogService.open(RegisterComponent, {
       header: 'Register',
