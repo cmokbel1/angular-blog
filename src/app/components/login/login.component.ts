@@ -8,6 +8,7 @@ import { RegisterComponent } from './register/register.component';
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
+  providers: [DialogService],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
