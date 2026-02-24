@@ -3,13 +3,14 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap, shareReplay } from 'rxjs/operators';
 import { Blog, ApiError } from 'src/app/shared/global.models';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BlogsService {
   private readonly http = inject(HttpClient);
-  private readonly API_URL = '/blogs';
+  private readonly API_URL = `${environment.apiBaseUrl}/blogs`;
 
   // Signals for reactive state management
   private readonly allBlogsSignal = signal<Blog[] | null>(null);

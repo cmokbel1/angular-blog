@@ -1,6 +1,6 @@
-import { Component, OnInit, signal, inject } from '@angular/core';
+import { Component, OnInit, signal, inject, PLATFORM_ID } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { DestroyRef } from '@angular/core';
 import { BackButtonComponent } from '../../shared/back-button/back-button.component';
@@ -18,6 +18,7 @@ export class BlogPageComponent implements OnInit {
   private readonly route = inject(ActivatedRoute);
   private readonly blogsService = inject(BlogsService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly platformId = inject(PLATFORM_ID);
 
   // Reactive signals
   blogId = signal<string | null>(null);
@@ -26,6 +27,10 @@ export class BlogPageComponent implements OnInit {
   error = signal<string | null>(null);
 
   ngOnInit() {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     const id = this.route.snapshot.paramMap.get('id');
     this.blogId.set(id);
 

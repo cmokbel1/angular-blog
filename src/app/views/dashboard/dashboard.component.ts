@@ -1,5 +1,12 @@
-import { Component, OnInit, signal, inject, DestroyRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {
+  Component,
+  OnInit,
+  signal,
+  inject,
+  DestroyRef,
+  PLATFORM_ID,
+} from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { BlogCardComponent } from '../../components/blog-card/blog-card.component';
 import { BlogsService } from '../../services/blogs.service';
 import { Blog } from 'src/app/shared/global.models';
@@ -14,16 +21,18 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 export class DashboardComponent implements OnInit {
   private readonly blogsService = inject(BlogsService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly platformId = inject(PLATFORM_ID);
 
   // Reactive signals
   loading = signal<boolean>(false);
   blogs = signal<Blog[]>([]);
   error = signal<string | null>(null);
 
-  // Legacy numbers for backward compatibility (remove when template is updated)
-  numbers: number[] = [1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10];
-
   ngOnInit(): void {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
     this.loadBlogs();
   }
 
