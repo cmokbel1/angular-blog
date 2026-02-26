@@ -7,10 +7,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { passwordMatchValidator } from './passwordMatch.validator';
+import { ButtonModule } from 'primeng/button';
+
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, ButtonModule],
   providers: [DialogService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
@@ -24,6 +26,8 @@ export class RegisterComponent {
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required),
       confirmPassword: new FormControl('', Validators.required),
+      firstName: new FormControl(''),
+      lastName: new FormControl(''),
     },
     { validators: passwordMatchValidator },
   );
