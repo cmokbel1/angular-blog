@@ -28,8 +28,8 @@ export class LoginComponent {
   openRegisterDialog() {
     this.dialogService.open(RegisterComponent, {
       header: 'Register',
-      width: '400px',
       closable: true,
+      styleClass: 'register-dialog',
     });
   }
 }

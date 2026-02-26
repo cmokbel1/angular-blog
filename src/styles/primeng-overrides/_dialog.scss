@@ -1,0 +1,19 @@
+@use '../variables';
+
+.p-dialog {
+  color: variables.$text-color !important;
+  background-color:azure !important;
+  width: 80dvw !important;
+   border: 1px solid variables.$border-light !important;
+}
+
+.p-dialog .p-dialog-header {
+  color: variables.$text-color !important;
+  font-size: 1.5rem !important;
+  padding: 1rem !important;
+  background-color: aliceblue !important;
+}
+
+.p-dialog .p-dialog-content {
+  color: variables.$text-color !important;
+}
