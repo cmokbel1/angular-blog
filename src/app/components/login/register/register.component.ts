@@ -1,5 +1,5 @@
 import { DialogService } from 'primeng/dynamicdialog';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 
 @Component({
   selector: 'app-register',
@@ -9,4 +9,6 @@ import { Component } from '@angular/core';
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
 })
-export class RegisterComponent {}
+export class RegisterComponent {
+  private readonly dialogService = inject(DialogService);
+}
