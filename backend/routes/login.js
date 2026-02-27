@@ -15,20 +15,30 @@ router.post("/", async (req, res) => {
         .json({ error: "Username and password are required" });
     }
 
-    // Find user in the database
-    const user = await User.findOne({ username });
+    User.authenticate()(username, password, (err, user) => {
+      if (err) {
+        return res
+          .status(err.status)
+          .json({ error: "Something unexpected occured", err });
+      }
 
-    if (!user) {
-      return res.status(401).json({ error: "Invalid username or password" });
-    }
+      if (!user) {
+        return res
+          .status(400)
+          .json({ error: "Bad Request: Invalid username or password" });
+      }
 
-    // Check password (for simplicity, using plain text - in production, use hashed passwords)
-    if (user.password !== password) {
-      return res.status(401).json({ error: "Invalid username or password" });
-    }
-
-    // Successful login
-    res.status(200).json({ message: "Login successful", user });
+      // Successful login
+      return res.status(200).json({
+        message: "Login successful",
+        user: {
+          id: user._id,
+          username: user.username,
+          isAdmin: user.isAdmin,
+          createdAt: user.createdAt,
+        },
+      });
+    });
   } catch (error) {
     res.status(500).json({ error: "Internal server error" });
   }

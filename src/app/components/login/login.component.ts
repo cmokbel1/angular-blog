@@ -29,7 +29,6 @@ export class LoginComponent {
     this.dialogService.open(RegisterComponent, {
       header: 'Register',
       closable: true,
-      styleClass: 'register-dialog',
     });
   }
 }

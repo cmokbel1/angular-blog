@@ -9,11 +9,11 @@
                 <input type="password" id="password" formControlName="password" required>
                 <label for="confirmPassword">Confirm Password:</label>
                 <input type="password" id="confirmPassword" formControlName="confirmPassword" required>
-                <label for="firstName">First Name:</label>
+                <label for="firstName">First Name <span class="optional-tag">(optional)</span>:</label>
                 <input type="text" id="firstName" formControlName="firstName">
-                <label for="lastName">Last Name:</label>
+                <label for="lastName">Last Name <span class="optional-tag">(optional)</span>:</label>
                 <input type="text" id="lastName" formControlName="lastName">
             </div>
         </form>
-        <p-button [class]="'button'" type="submit" label="Register" [icon]="'pi pi-check'"></p-button>
+        <p-button [loading]="isLoading()" [disabled]="registerForm.invalid" [class]="'button'" type="submit" label="Register" [icon]="'pi pi-check'"></p-button>
 </div>

@@ -1,5 +1,5 @@
-import { DialogService } from 'primeng/dynamicdialog';
-import { Component, inject } from '@angular/core';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { Component, inject, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -8,6 +8,8 @@ import {
 } from '@angular/forms';
 import { passwordMatchValidator } from './passwordMatch.validator';
 import { ButtonModule } from 'primeng/button';
+import { AuthService } from 'src/app/services/auth.service';
+import { RequestCredentials } from 'src/app/shared/global.models';
 
 @Component({
   selector: 'app-register',
@@ -19,6 +21,9 @@ import { ButtonModule } from 'primeng/button';
 })
 export class RegisterComponent {
   private readonly dialogService = inject(DialogService);
+  private readonly authService = inject(AuthService);
+  private readonly dialogRef = inject(DynamicDialogRef);
+  isLoading = signal<boolean>(false);
 
   registerForm = new FormGroup(
     {
@@ -33,6 +38,16 @@ export class RegisterComponent {
   );
 
   onSubmit(): void {
-    console.log(this.registerForm.value);
+    this.isLoading.set(true);
+    if (this.registerForm.valid) {
+      const payload: RequestCredentials = {
+        username: this.registerForm.controls.username.value ?? '',
+        password: this.registerForm.controls.password.value ?? '',
+      };
+
+      this.authService.registerUser(payload);
+      this.dialogRef.close();
+    }
+    this.isLoading.set(false);
   }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { User } from '../shared/global.models';
+import { RequestCredentials } from '../shared/global.models';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -9,10 +9,27 @@ import { environment } from 'src/environments/environment';
 export class AuthService {
   private readonly http = inject(HttpClient);
   private readonly loginSlug: string = `${environment.apiBaseUrl}/login`;
+  private readonly registerSlug: string = `${environment.apiBaseUrl}/login/register`;
 
-  loginUser(credentials: User): void {
-    // Implement login logic here, e.g., send credentials to the backend
-    console.log('Login function called');
+  registerUser(registerCredentials: RequestCredentials): void {
+    this.http.post(this.registerSlug, registerCredentials).subscribe({
+      next: (response) => {
+        console.log('Registration successful', response);
+      },
+      error: (error) => {
+        console.error('Registration failed', error);
+      },
+    });
+  }
+  loginUser(credentials: RequestCredentials): void {
+    this.http.post(this.loginSlug, credentials).subscribe({
+      next: (response) => {
+        console.log('Login successful', response);
+      },
+      error: (error) => {
+        console.error('Login failed', error);
+      },
+    });
   }
   constructor() {}
 }
