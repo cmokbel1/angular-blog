@@ -7,8 +7,10 @@ import {
   disconnectDB,
   keepConnectionAlive,
 } from "./config/database.js";
+import Blog from "./models/Blog.js";
 import User from "./models/User.js";
-import passport from "passport";
+import { ensureCollectionsExist } from "./startup/ensureCollections.js";
+import { configureAuth } from "./startup/auth.js";
 
 // Load environment variables from .env file
 dotenv.config();
@@ -18,12 +20,10 @@ const port = 8080;
 
 app.use(cors());
 app.use(express.json());
-app.use(passport.initialize());
+app.use(configureAuth(User));
 
-passport.use(User.createStrategy());
+await ensureCollectionsExist([Blog, User]);
 
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
 
 // Database connection middleware for intermittent connections
 app.use(async (req, res, next) => {
@@ -35,7 +35,9 @@ app.use(async (req, res, next) => {
     keepConnectionAlive();
   } catch (error) {
     console.error("Database connection failed:", error);
-    return res.status(500).json({ error: "Database connection failed" });
+    return res
+      .status(error.status || 500)
+      .json({ error: `Database connection failed : ${error}` });
   }
   next();
 });

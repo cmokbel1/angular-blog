@@ -5,6 +5,6 @@ import login from "./login.js";
 const router = express.Router();
 
 router.use("/blogs", blogs);
-router.use("login", login);
+router.use("/login", login);
 
 export default router;

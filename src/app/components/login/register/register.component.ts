@@ -28,7 +28,7 @@ export class RegisterComponent {
   registerForm = new FormGroup(
     {
       username: new FormControl('', Validators.required),
-      email: new FormControl('', [Validators.required, Validators.email]),
+      email: new FormControl('', Validators.email),
       password: new FormControl('', Validators.required),
       confirmPassword: new FormControl('', Validators.required),
       firstName: new FormControl(''),
@@ -39,6 +39,7 @@ export class RegisterComponent {
 
   onSubmit(): void {
     this.isLoading.set(true);
+    console.log(this.registerForm.value, 'register button clicked');
     if (this.registerForm.valid) {
       const payload: RequestCredentials = {
         username: this.registerForm.controls.username.value ?? '',

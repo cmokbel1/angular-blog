@@ -20,9 +20,29 @@
             color: #888;
             font-style: italic;
         }
+        .error {
+            border: 1px solid red;
+            background-color: #ffe6e6;
+        }
+        .error-message {
+            color: red;
+            font-style: italic;
+            font-size: 12px;
+            margin-top: 5px;
+        }
     }  
     .button {
             background-color:#A4FEA4;
             color: black;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100px;
+            &.disabled {
+                background-color: #ccc;
+                color: gray;
+                pointer-events: none;
+                cursor: not-allowed;
+            }
         }
 }
