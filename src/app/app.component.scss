@@ -1,0 +1,9 @@
+:host {
+	display: block;
+}
+
+.body-container {
+	min-height: 100dvh;
+	box-sizing: border-box;
+	padding-bottom: var(--footer-height);
+}

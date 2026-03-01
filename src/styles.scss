@@ -3,10 +3,15 @@
 @import "primeicons/primeicons.css";
 /* You can add global styles to this file, and also import other style files */
 /* PrimeNG CSS import removed for v19+ - will need to be updated for new structure */
+:root {
+    --footer-height: 56px;
+}
+
 html, body {
   margin: 0 !important;
   padding: 0;
   height: 100%; /* Recommended to ensure full height */
+    overflow-y: auto;
 }
 
 
@@ -22,3 +27,17 @@ h1,h2,h3 {
         "Segoe UI Symbol";
 }
 
+    .button {
+            background-color:#A4FEA4;
+            color: black;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100px;
+            &.disabled {
+                background-color: #ccc;
+                color: gray;
+                pointer-events: none;
+                cursor: not-allowed;
+            }
+        }
