@@ -31,6 +31,7 @@ export class AuthService {
   readonly currentUser = this.currentUserSignal.asReadonly();
   readonly isAuthenticated = computed(() => this.currentUserSignal() !== null);
 
+  // AUTH HTTP REQUESTS
   registerUser(registerCredentials: RequestCredentials): Observable<unknown> {
     return this.http.post(this.registerSlug, registerCredentials);
   }
@@ -42,7 +43,7 @@ export class AuthService {
       }),
     );
   }
-
+  // LOGOUT AND HYDRATION
   logoutUser(): void {
     this.currentUserSignal.set(null);
 
