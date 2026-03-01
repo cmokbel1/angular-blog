@@ -10,6 +10,18 @@ export interface RequestCredentials {
   password: string;
 }
 
+export interface AuthUser {
+  id: string;
+  username: string;
+  isAdmin?: boolean;
+  createdAt?: Date | string;
+}
+
+export interface LoginResponse {
+  message: string;
+  user: AuthUser;
+}
+
 // Blog interface matching the backend model
 export interface Blog {
   _id: string;

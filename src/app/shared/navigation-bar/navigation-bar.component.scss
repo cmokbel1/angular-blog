@@ -5,3 +5,13 @@ nav {
     background-color: #8d99ae;
     margin: 0;
 }
+
+.auth-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.welcome {
+    font-weight: 600;
+}

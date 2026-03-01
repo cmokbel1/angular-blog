@@ -1,5 +1,5 @@
 <nav>
-  <a [routerLink]="['']">
+  <a [routerLink]="['/']">
     <img
       src="../assets/Stachecurlssticker.png"
       alt="logo"
@@ -8,7 +8,13 @@
     />
   </a>
   <h2>Welcome to Claude's Corner</h2>
-  <a [routerLink]="['/login']">
-    <p-button class="button">Login</p-button>
-  </a>
+  <div class="auth-controls">
+    @if (isAuthenticated()) {
+      <span class="welcome">Hi, {{ currentUser()?.username }}</span>
+    }
+    <a [routerLink]="!isAuthenticated() ? ['/login'] : null">
+      <p-button class="button" (click)="isAuthenticated() ? logout() : null ">{{ !isAuthenticated() ? 'Login' : 'Logout' }}</p-button>
+    </a>
+  </div>
+  
 </nav>
