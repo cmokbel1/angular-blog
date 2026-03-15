@@ -53,10 +53,13 @@ router.post("/register", async (req, res) => {
 
   const existing = await User.findOne({ username });
   if (existing)
-    return res.status(409).json({ error: "Username already exists" });
+    // TODO create a type return for these responses
+    // include error in all types, status, and data
+
+    return res.status(409).json({ error: "Username already exists", status: res.status });
 
   const user = await User.register(new User({ username }), password); // pre-save hook hashes it
-  return res.status(201).json({ id: user._id, username: user.username });
+  return res.status(201).json({ id: user._id, username: user.username, status: res.status });
 });
 
 export default router;

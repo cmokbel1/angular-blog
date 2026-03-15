@@ -26,18 +26,3 @@ h1,h2,h3 {
         Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
         "Segoe UI Symbol";
 }
-
-    .button {
-            background-color:#A4FEA4;
-            color: black;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            width: 100px;
-            &.disabled {
-                background-color: #ccc;
-                color: gray;
-                pointer-events: none;
-                cursor: not-allowed;
-            }
-        }

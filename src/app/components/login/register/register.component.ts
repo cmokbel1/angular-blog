@@ -1,3 +1,4 @@
+import { RegistrationSuccessMessage } from './../../../shared/message/messages.model'
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Component, inject, signal } from '@angular/core';
 import {
@@ -10,11 +11,15 @@ import { passwordMatchValidator } from './passwordMatch.validator';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from 'src/app/services/auth.service';
 import { RequestCredentials } from 'src/app/shared/global.models';
+import { BlogMessageService } from 'src/app/shared/message/blog-message-service.service';
+import { MessageScopes, RegistrationFailureMessage } from 'src/app/shared/message/messages.model';
+import { MessageComponent } from "src/app/shared/message/message.component";
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, ButtonModule],
+  imports: [ReactiveFormsModule, ButtonModule, MessageComponent],
   providers: [DialogService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
@@ -23,6 +28,9 @@ export class RegisterComponent {
   private readonly dialogService = inject(DialogService);
   private readonly authService = inject(AuthService);
   private readonly dialogRef = inject(DynamicDialogRef);
+  private readonly messageService = inject(BlogMessageService);
+
+  MessageScopes = MessageScopes
   isLoading = signal<boolean>(false);
 
   registerForm = new FormGroup(
@@ -39,16 +47,33 @@ export class RegisterComponent {
 
   onSubmit(): void {
     this.isLoading.set(true);
-    console.log(this.registerForm.value, 'register button clicked');
     if (this.registerForm.valid) {
       const payload: RequestCredentials = {
         username: this.registerForm.controls.username.value ?? '',
         password: this.registerForm.controls.password.value ?? '',
       };
 
-      this.authService.registerUser(payload);
-      this.dialogRef.close();
+      this.authService
+        .registerUser(payload)
+        .pipe(finalize(() => {
+          this.isLoading.set(false);
+    }))
+        .subscribe({
+          next: (response) => {
+            if(response.status === 200) {
+            this.messageService.showMessage(RegistrationSuccessMessage);
+            this.dialogRef.close();
+            return;
+            }
+          },
+          error: (error) => {
+            console.log(error);
+            this.messageService.showMessage(RegistrationFailureMessage);
+          },
+        });
+      return;
     }
+
     this.isLoading.set(false);
   }
 }

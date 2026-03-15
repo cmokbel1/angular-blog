@@ -1,6 +1,7 @@
 @let formControl = registerForm.controls;
 
 <div class="register-dialog-container">
+    <app-message [scope]="MessageScopes.Register"></app-message>
         <form [formGroup]="registerForm" >
             <div class="form-group">
                 <label for="username">Username:</label>

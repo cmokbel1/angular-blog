@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import {
   computed,
   inject,
@@ -32,7 +32,7 @@ export class AuthService {
   readonly isAuthenticated = computed(() => this.currentUserSignal() !== null);
 
   // AUTH HTTP REQUESTS
-  registerUser(registerCredentials: RequestCredentials): Observable<unknown> {
+  registerUser(registerCredentials: RequestCredentials): Observable<any> {
     return this.http.post(this.registerSlug, registerCredentials);
   }
 

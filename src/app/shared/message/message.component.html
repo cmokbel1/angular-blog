@@ -1,0 +1,12 @@
+@for (message of messages(); track $index) {
+    <p-message 
+    [class]="'message-component'"
+    [severity]="$any(message.severity)"
+    [icon]="message.icon"
+    role="alert"
+    aria-live="assertive"
+    [closable]="message.closable ?? false"
+    [showTransitionOptions]="'0s'"
+    [attr.data-testid]="'message'"
+    >{{ message.detail || message.summary || '' }}</p-message>
+}
