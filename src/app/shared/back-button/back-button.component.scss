@@ -2,11 +2,11 @@
 
 .back-button {
     padding:1em;
-    background-color:variables.$secondary-color;
-    color: variables.$primary-color;
+    background-color:variables.$button-color-primary;
+    color: variables.$button-text-color-primary;
     box-shadow: 0 2px 4px variables.$border-light;
     &:hover {
-        background-color: variables.$tertiary-color;
+        background-color: variables.$button-color-hover;
         color: variables.$white;
     }
 }

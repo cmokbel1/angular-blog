@@ -2,7 +2,7 @@ import { Component, computed, inject, input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MessageModule } from 'primeng/message';
 import { MessageScopes } from './messages.model';
-import { BlogMessageService } from './blog-message-service.service';
+import { BlogMessageService } from '../../services/blog-message-service.service';
 
 @Component({
   selector: 'app-message',

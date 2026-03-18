@@ -1,6 +1,12 @@
+@use '../../../styles/variables';
+
 .blog-page-container {
+  margin-top: 1rem;
+  gap: 1em;
+  display:flex;
+  flex-direction:column;
   .blog-content-container {
-    color: #fafafb;
+    color: variables.$primary-color;
     gap: 25px;
     text-align: center;
     display: flex;
@@ -9,7 +15,7 @@
       justify-content: center;
       display: flex;
       flex-direction: column;
-
+      background-color: variables.$secondary-color;
       .blog-content {
         padding: 1em;
         text-align: left;

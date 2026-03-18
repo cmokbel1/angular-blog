@@ -11,7 +11,7 @@ import { passwordMatchValidator } from './passwordMatch.validator';
 import { ButtonModule } from 'primeng/button';
 import { AuthService } from 'src/app/services/auth.service';
 import { RequestCredentials } from 'src/app/shared/global.models';
-import { BlogMessageService } from 'src/app/shared/message/blog-message-service.service';
+import { BlogMessageService } from 'src/app/services/blog-message-service.service';
 import { MessageScopes, RegistrationFailureMessage } from 'src/app/shared/message/messages.model';
 import { MessageComponent } from "src/app/shared/message/message.component";
 import { finalize } from 'rxjs';
@@ -60,11 +60,11 @@ export class RegisterComponent {
     }))
         .subscribe({
           next: (response) => {
-            if(response.status === 200) {
+            console.log(response);
             this.messageService.showMessage(RegistrationSuccessMessage);
             this.dialogRef.close();
             return;
-            }
+            
           },
           error: (error) => {
             console.log(error);

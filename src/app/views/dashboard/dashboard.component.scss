@@ -1,5 +1,15 @@
+@use '../../../styles/variables';
+
 .dashboard-container {
-    color: #8d99ae;
+    color: variables.$text-color;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    h1, h3 {
+        color: variables.$primary-color;
+        background-color: variables.$secondary-color;
+    }
     .blog-card-container {
         display:flex;
         flex-direction: column;
