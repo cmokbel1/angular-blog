@@ -1,16 +1,19 @@
 import { Component, input } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-blog-card',
-  imports: [RouterModule],
+  imports: [RouterModule, CommonModule],
   standalone: true,
   templateUrl: './blog-card.component.html',
   styleUrl: './blog-card.component.scss',
 })
 export class BlogCardComponent {
-  title = input<string>('init');
   id = input<string | null>('');
+  title = input<string>('');
   excerpt = input<string | undefined>('');
-  createdAt: string = 'Oct 5th, 2024';
+  author = input<string>('');
+  createdAt = input<Date | string | undefined>(undefined);
+  tags = input<string[]>([]);
 }

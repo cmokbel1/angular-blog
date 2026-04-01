@@ -1,20 +1,59 @@
 @use '../../../styles/variables';
 
 .dashboard-container {
-    color: variables.$text-color;
-    text-align: center;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
-    h1, h3 {
-        color: variables.$primary-color;
-        background-color: variables.$secondary-color;
-    }
-    .blog-card-container {
-        display:flex;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dashboard-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid variables.$border-color;
+
+    .header-text {
+        display: flex;
         flex-direction: column;
-        gap: 25px;
-        justify-content: center;
+        gap: 0.25rem;
+
+        h1 {
+            display: block;
+        }
+
+        .header-subtitle {
+            margin: 0;
+            color: variables.$text-muted;
+            font-size: 0.95rem;
+        }
     }
 
+    .post-count {
+        font-size: 0.8rem;
+        color: variables.$text-muted;
+        font-weight: 500;
+        white-space: nowrap;
+    }
+}
+
+.blog-card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    align-items: start;
+}
+
+.loading-state,
+.empty-state,
+.error-state {
+    padding: 3rem 1rem;
+    text-align: center;
+    color: variables.$text-muted;
+    font-size: 0.95rem;
 }

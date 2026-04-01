@@ -1,10 +1,19 @@
+@use '../../../styles/variables';
+
 nav {
     display: flex;
     align-items: center;
     justify-content: space-around;
-    background-color: #8d99ae;
+    background-color: variables.$surface-color;
+    border-bottom: 1px solid variables.$border-color;
     margin: 0;
-    text-align:center;
+    text-align: center;
+        @media (max-width: 720px) {
+        padding: 0 0.5em 0 0.5em;
+        h2 {
+            font-size: 1.75em;
+        }
+    }
 }
 
 .auth-controls {
@@ -15,4 +24,5 @@ nav {
 
 .welcome {
     font-weight: 600;
+    color: variables.$text-color;
 }

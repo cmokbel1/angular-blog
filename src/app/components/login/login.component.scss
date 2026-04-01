@@ -1,47 +1,64 @@
 @use '../../../styles/variables';
 
 .login-container {
-  margin-top: 1rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: variables.$primary-color;
-  width:max-content;
-  margin-left:auto;
-  margin-right: auto;
-  padding: 1rem;
-  h2 {
-    color: variables.$secondary-color;
-    font-size: 2em;
-    margin-bottom: 20px;
-  }
-  .form-group {
+    margin-top: 1rem;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    width: 100%;
-    padding-bottom: 20px;
-    .form-input {
-      display: flex;
-      flex-direction: column;
-      padding-bottom: 20px;
-      gap: 5px;
-      input {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 1em;
-      }
+    align-items: center;
+    justify-content: center;
+    background-color: variables.$surface-color;
+    border: 1px solid variables.$border-color;
+    border-radius: variables.$border-radius-lg;
+    width: max-content;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1.5rem;
+
+    h2 {
+        color: variables.$primary-color;
+        font-size: 2em;
+        margin-bottom: 20px;
     }
-  }
-  .register-link {
-    display: flex;
-    padding: 15px;
-    .register {
-      pointer-events: auto;
-      cursor: pointer;
-      text-decoration: underline;
+
+    .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        padding-bottom: 20px;
+
+        .form-input {
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 20px;
+            gap: 5px;
+
+            input {
+                padding: 10px;
+                border: 1px solid variables.$border-color;
+                border-radius: variables.$border-radius;
+                font-size: 1em;
+                color: variables.$text-color;
+                background-color: variables.$background-color;
+
+                &:focus {
+                    outline: none;
+                    border-color: variables.$primary-color;
+                }
+            }
+        }
     }
-  }
+
+    .register-link {
+        display: flex;
+        padding: 15px;
+        color: variables.$text-muted;
+
+        .register {
+            pointer-events: auto;
+            cursor: pointer;
+            text-decoration: underline;
+            color: variables.$primary-color;
+        }
+    }
 }

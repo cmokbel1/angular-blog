@@ -1,17 +1,38 @@
 <div class="dashboard-container">
   @if (loading()) {
-    <h3>...loading</h3>
-  } @else {
-    <h1>Blogs</h1>
-    <div class="blog-card-container">
-      <!-- TODO: add for loop when database is connected -->
-      @for (blog of blogs(); track $index) {
-        <app-blog-card
-          [id]="blog._id"
-          [title]="blog.title"
-          [excerpt]="blog.excerpt"
-        ></app-blog-card>
-      }
+    <div class="loading-state">
+      <p>Loading posts...</p>
     </div>
+  } @else if (error()) {
+    <div class="error-state">
+      <p>{{ error() }}</p>
+    </div>
+  } @else {
+    <header class="dashboard-header">
+      <div class="header-text">
+        <h1>The Blog</h1>
+        <p class="header-subtitle">Thoughts, ideas, and things worth writing down.</p>
+      </div>
+      <span class="post-count">{{ blogs().length }} {{ blogs().length === 1 ? 'post' : 'posts' }}</span>
+    </header>
+
+    @if (blogs().length === 0) {
+      <div class="empty-state">
+        <p>No posts published yet.</p>
+      </div>
+    } @else {
+      <div class="blog-card-container">
+        @for (blog of blogs(); track blog._id) {
+          <app-blog-card
+            [id]="blog._id"
+            [title]="blog.title"
+            [excerpt]="blog.excerpt"
+            [author]="blog.author"
+            [createdAt]="blog.createdAt"
+            [tags]="blog.tags"
+          ></app-blog-card>
+        }
+      </div>
+    }
   }
 </div>

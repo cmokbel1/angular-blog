@@ -1,15 +1,17 @@
+@use '../../../styles/variables';
+
 footer {
-    display:flex;
+    display: flex;
     text-align: center;
-    background-color:#8d99ae;
+    background-color: variables.$surface-color;
     align-items: center;
     justify-content: center;
-    color: whitesmoke;
-    border-top: 2px solid #d0d0d0;
+    color: variables.$text-muted;
+    border-top: 1px solid variables.$border-color;
     bottom: 0;
     left: 0;
-    position:fixed;
-    width:100%;
+    position: fixed;
+    width: 100%;
     min-height: var(--footer-height);
     box-sizing: border-box;
 }

@@ -1,12 +1,26 @@
-@use 'variables' as variables;
+@use '../../../styles/variables';
 
 .back-button {
-    padding:1em;
-    background-color:variables.$button-color-primary;
-    color: variables.$button-text-color-primary;
-    box-shadow: 0 2px 4px variables.$border-light;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: variables.$text-muted;
+    text-decoration: none;
+    padding: 0.3rem 0;
+    transition: color 0.15s ease;
+
+    i {
+        font-size: 0.75rem;
+        transition: transform 0.15s ease;
+    }
+
     &:hover {
-        background-color: variables.$button-color-hover;
-        color: variables.$white;
+        color: variables.$primary-color;
+
+        i {
+            transform: translateX(-3px);
+        }
     }
 }

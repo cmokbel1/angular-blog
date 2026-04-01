@@ -1,16 +1,42 @@
 <div class="blog-page-container">
   <app-back-button></app-back-button>
+
   @if (loading()) {
     <h3>...loading</h3>
   } @else {
-    <div class="blog-content-container">
-      <div class="container">
-        <h1>{{ blog()?.title }}</h1>
-        <br />
-        <div class="blog-content">
-          <p>{{ blog()?.content }}</p>
+    <div class="blog-layout">
+      <article class="blog-content-container">
+        <div class="container">
+          <h1>{{ blog()?.title }}</h1>
+          <div class="blog-meta">
+            <span class="blog-author">{{ blog()?.author }}</span>
+            <span class="blog-date">{{ blog()?.formattedDate ?? (blog()?.createdAt | date:'mediumDate') }}</span>
+          </div>
+          <div class="blog-content">
+            @for (paragraph of paragraphs(); track $index) {
+              <p>{{ paragraph }}</p>
+            }
+          </div>
         </div>
-      </div>
+      </article>
+
+      <aside class="blog-sidebar">
+        <div class="sidebar-section">
+          <h3>More Posts</h3>
+          @if (otherBlogs().length === 0) {
+            <p class="no-posts">No other posts yet.</p>
+          } @else {
+            <ul class="other-blogs-list">
+              @for (other of otherBlogs(); track other._id) {
+                <li>
+                  <a [routerLink]="['/blog', other._id]">{{ other.title }}</a>
+                  <span class="sidebar-date">{{ other.formattedDate ?? (other.createdAt | date:'mediumDate') }}</span>
+                </li>
+              }
+            </ul>
+          }
+        </div>
+      </aside>
     </div>
   }
 </div>
