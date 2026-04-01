@@ -101,6 +101,53 @@ export class BlogsService {
   }
 
   /**
+   * Create a new blog post
+   */
+  createBlog(data: Partial<Blog>): Observable<Blog> {
+    return this.http.post<Blog>(this.API_URL, data).pipe(
+      tap((created) => {
+        const current = this.allBlogsSignal();
+        if (current) {
+          this.allBlogsSignal.set([created, ...current]);
+        }
+      }),
+      catchError((error) => this.handleError('Failed to create blog', error)),
+    );
+  }
+
+  /**
+   * Update an existing blog post
+   */
+  updateBlog(id: string, data: Partial<Blog>): Observable<Blog> {
+    return this.http.put<Blog>(`${this.API_URL}/${id}`, data).pipe(
+      tap((updated) => {
+        const current = this.allBlogsSignal();
+        if (current) {
+          this.allBlogsSignal.set(
+            current.map((b) => (b._id === id ? updated : b)),
+          );
+        }
+      }),
+      catchError((error) => this.handleError('Failed to update blog', error)),
+    );
+  }
+
+  /**
+   * Delete a blog post
+   */
+  deleteBlog(id: string): Observable<void> {
+    return this.http.delete<void>(`${this.API_URL}/${id}`).pipe(
+      tap(() => {
+        const current = this.allBlogsSignal();
+        if (current) {
+          this.allBlogsSignal.set(current.filter((b) => b._id !== id));
+        }
+      }),
+      catchError((error) => this.handleError('Failed to delete blog', error)),
+    );
+  }
+
+  /**
    * Get cached blogs without making API call
    */
   getCachedBlogs(): Blog[] | null {

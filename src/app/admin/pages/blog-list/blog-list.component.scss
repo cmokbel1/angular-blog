@@ -1,0 +1,186 @@
+@use '../../../../styles/variables';
+
+.admin-page {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.page-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    h1 {
+        display: block;
+        font-size: 1.5rem;
+        color: variables.$primary-color;
+    }
+}
+
+.btn-primary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.45rem 1rem;
+    background-color: variables.$primary-color;
+    color: variables.$white;
+    border-radius: variables.$border-radius;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: background-color 0.15s ease;
+
+    i { font-size: 0.8rem; }
+
+    &:hover {
+        background-color: variables.$button-color-hover;
+    }
+}
+
+.loading-text {
+    color: variables.$text-muted;
+}
+
+.table-wrapper {
+    border: 1px solid variables.$border-color;
+    border-radius: variables.$border-radius-lg;
+    overflow: hidden;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: variables.$surface-color;
+    font-size: 0.9rem;
+
+    thead tr {
+        background-color: variables.$secondary-color;
+        border-bottom: 1px solid variables.$border-color;
+    }
+
+    th {
+        text-align: left;
+        padding: 0.65rem 1rem;
+        font-size: 0.775rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: variables.$text-muted;
+    }
+
+    td {
+        padding: 0.75rem 1rem;
+        color: variables.$text-color;
+        border-bottom: 1px solid variables.$border-color;
+        vertical-align: middle;
+    }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+    tbody tr:hover td {
+        background-color: variables.$background-color;
+    }
+
+    .td-title {
+        font-weight: 500;
+        max-width: 280px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .td-date {
+        white-space: nowrap;
+        color: variables.$text-muted;
+        font-size: 0.85rem;
+    }
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.25rem;
+}
+
+.tag {
+    font-size: 0.7rem;
+    padding: 0.15em 0.55em;
+    background-color: variables.$secondary-color;
+    border: 1px solid variables.$border-color;
+    border-radius: 999px;
+    color: variables.$text-muted;
+}
+
+.tag-more {
+    font-size: 0.7rem;
+    color: variables.$text-muted;
+    padding: 0.15em 0.25em;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 0.2em 0.65em;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    background-color: variables.$secondary-color;
+    color: variables.$text-muted;
+
+    &.published {
+        background-color: #dcfce7;
+        color: #166534;
+    }
+}
+
+.action-group {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.action-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: variables.$border-radius;
+    border: none;
+    background: transparent;
+    color: variables.$text-muted;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+
+    i { font-size: 0.875rem; }
+
+    &:hover {
+        background-color: variables.$secondary-color;
+        color: variables.$primary-color;
+    }
+
+    &.action-delete:hover {
+        background-color: #fef2f2;
+        color: #dc2626;
+    }
+
+    &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+    }
+}
+
+.empty-state {
+    padding: 3rem;
+    text-align: center;
+    background-color: variables.$surface-color;
+    border: 1px solid variables.$border-color;
+    border-radius: variables.$border-radius-lg;
+    color: variables.$text-muted;
+
+    a { color: variables.$primary-color; }
+}

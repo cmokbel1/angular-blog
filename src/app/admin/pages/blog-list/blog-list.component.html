@@ -1,0 +1,74 @@
+<div class="admin-page">
+  <div class="page-header">
+    <h1>Blog Posts</h1>
+    <a routerLink="/admin/blogs/new" class="btn-primary">
+      <i class="pi pi-plus"></i>
+      New Post
+    </a>
+  </div>
+
+  @if (loading()) {
+    <p class="loading-text">Loading posts...</p>
+  } @else if (blogs().length === 0) {
+    <div class="empty-state">
+      <p>No posts yet. <a routerLink="/admin/blogs/new">Create your first post.</a></p>
+    </div>
+  } @else {
+    <div class="table-wrapper">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Tags</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (blog of blogs(); track blog._id) {
+            <tr>
+              <td class="td-title">{{ blog.title }}</td>
+              <td>{{ blog.author }}</td>
+              <td>
+                <div class="tag-list">
+                  @for (tag of blog.tags.slice(0, 3); track tag) {
+                    <span class="tag">{{ tag }}</span>
+                  }
+                  @if (blog.tags.length > 3) {
+                    <span class="tag-more">+{{ blog.tags.length - 3 }}</span>
+                  }
+                </div>
+              </td>
+              <td class="td-date">{{ blog.createdAt | date:'mediumDate' }}</td>
+              <td>
+                <span class="status-badge" [class.published]="blog.published !== false">
+                  {{ blog.published !== false ? 'Published' : 'Draft' }}
+                </span>
+              </td>
+              <td>
+                <div class="action-group">
+                  <a [routerLink]="['/blog', blog._id]" class="action-link" target="_blank" title="View post">
+                    <i class="pi pi-external-link"></i>
+                  </a>
+                  <a [routerLink]="['/admin/blogs', blog._id, 'edit']" class="action-link" title="Edit post">
+                    <i class="pi pi-pencil"></i>
+                  </a>
+                  <button
+                    class="action-link action-delete"
+                    (click)="confirmDelete(blog)"
+                    [disabled]="deletingId() === blog._id"
+                    title="Delete post"
+                  >
+                    <i class="pi pi-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

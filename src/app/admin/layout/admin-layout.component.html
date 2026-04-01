@@ -1,0 +1,31 @@
+<div class="admin-shell">
+  <aside class="admin-sidebar">
+    <div class="sidebar-brand">
+      <span class="brand-icon">&#9998;</span>
+      <span>Admin</span>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a routerLink="/admin/dashboard" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        <i class="pi pi-home"></i>
+        <span>Dashboard</span>
+      </a>
+      <a routerLink="/admin/blogs" routerLinkActive="active">
+        <i class="pi pi-file-edit"></i>
+        <span>Blogs</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <span class="sidebar-user">{{ currentUser()?.username }}</span>
+      <a routerLink="/" class="view-site-link">
+        <i class="pi pi-arrow-left"></i>
+        <span>View site</span>
+      </a>
+    </div>
+  </aside>
+
+  <div class="admin-main">
+    <router-outlet></router-outlet>
+  </div>
+</div>
