@@ -8,14 +8,40 @@
     />
   </a>
   <h2>Welcome to Claude's Corner</h2>
-  @if (!isAuthenticated()) {
-    <a [routerLink]="['/login']">
-      <p-button class="button">Login</p-button>
-    </a>
-  } @else {
-    <div class="auth-controls">
-      <span class="welcome">Hi, {{ currentUser()?.username }}</span>
-      <p-button class="button" (click)="logout()">Logout</p-button>
-    </div>
-  }
+
+  <div class="user-menu">
+    <button class="hamburger" (click)="toggleMenu()">
+      @if (isAuthenticated()) {
+        <span class="username">Hi, {{ currentUser()?.username }}</span>
+      }
+      <div class="hamburger-icon" [class.open]="menuOpen()">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+
+    @if (menuOpen()) {
+      <div class="dropdown">
+        @if (isAuthenticated()) {
+          @if (isAdmin()) {
+            <a routerLink="/admin" class="dropdown-item" (click)="menuOpen.set(false)">
+              <i class="pi pi-cog"></i>
+              Admin Dashboard
+            </a>
+            <div class="dropdown-divider"></div>
+          }
+          <button class="dropdown-item dropdown-item-danger" (click)="logout()">
+            <i class="pi pi-sign-out"></i>
+            Logout
+          </button>
+        } @else {
+          <a routerLink="/login" class="dropdown-item" (click)="menuOpen.set(false)">
+            <i class="pi pi-sign-in"></i>
+            Login
+          </a>
+        }
+      </div>
+    }
+  </div>
 </nav>

@@ -27,7 +27,7 @@ export class BlogFormComponent implements OnInit {
   readonly error = signal<string | null>(null);
   readonly tagInput = signal('');
 
-  readonly form = this.fb.group({
+  readonly form = this.fb.nonNullable.group({
     title:     ['', [Validators.required, Validators.minLength(3)]],
     content:   ['', [Validators.required, Validators.minLength(10)]],
     excerpt:   [''],
@@ -71,7 +71,7 @@ export class BlogFormComponent implements OnInit {
   }
 
   get tags(): string[] {
-    return this.form.get('tags')?.value ?? [];
+    return this.form.controls.tags.value;
   }
 
   addTag(): void {
