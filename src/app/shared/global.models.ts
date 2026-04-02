@@ -13,6 +13,7 @@ export interface RequestCredentials {
 export interface AuthUser {
   id: string;
   username: string;
+  firstName?: string;
   isAdmin?: boolean;
   createdAt?: Date | string;
 }

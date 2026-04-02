@@ -12,7 +12,7 @@
   <div class="user-menu">
     <button class="hamburger" (click)="toggleMenu()">
       @if (isAuthenticated()) {
-        <span class="username">Hi, {{ currentUser()?.username }}</span>
+        <span class="username">Hi, {{ currentUser()?.firstName ? currentUser()?.firstName : currentUser()?.username }}</span>
       }
       <div class="hamburger-icon" [class.open]="menuOpen()">
         <span></span>
